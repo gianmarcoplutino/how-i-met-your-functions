@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./App.css";
 
 interface User {
-  id: string;
   name: string;
   surname: string;
   email: string;
@@ -11,7 +10,6 @@ interface User {
 
 const App: React.FC = () => {
   const [formData, setFormData] = useState<User>({
-    id: "",
     name: "",
     surname: "",
     email: "",
@@ -34,7 +32,15 @@ const App: React.FC = () => {
       },
       body: JSON.stringify(formData),
     })
-      .then(() => window.alert("Richiesta presa in carico"))
+      .then(() => {
+        window.alert("Richiesta presa in carico");
+        setFormData({
+          name: "",
+          surname: "",
+          email: "",
+          birthdate: "",
+        });
+      })
       .catch((error) => console.error(error));
   };
 
@@ -46,11 +52,16 @@ const App: React.FC = () => {
       .catch((error) => console.error(error));
   };
 
+  const dummyUsers: User[] = [
+    { name: 'John', surname: 'Doe', email: 'john@example.com', birthdate: '1990-01-01' },
+    { name: 'Jane', surname: 'Doe', email: 'jane@example.com', birthdate: '1995-05-15' },
+  ];
+
   return (
     <div className="app">
       <form className="form" onSubmit={handleSubmit}>
         <label>
-          Name:
+          Nome:
           <input
             type="text"
             name="name"
@@ -59,7 +70,7 @@ const App: React.FC = () => {
           />
         </label>
         <label>
-          Surname:
+          Cognome:
           <input
             type="text"
             name="surname"
@@ -68,7 +79,7 @@ const App: React.FC = () => {
           />
         </label>
         <label>
-          Email:
+          Mail:
           <input
             type="email"
             name="email"
@@ -77,7 +88,7 @@ const App: React.FC = () => {
           />
         </label>
         <label>
-          Birthdate:
+          Data di nascita:
           <input
             type="date"
             name="birthdate"
@@ -85,25 +96,25 @@ const App: React.FC = () => {
             onChange={handleChange}
           />
         </label>
-        <button type="submit">Submit</button>
+        <button type="submit">Invia Utente</button>
       </form>
-      <button onClick={handleGetUsers}>Get Users</button>
+      <button onClick={handleGetUsers}>Ottieni Utenti</button>
 
       {users.length > 0 && (
         <table>
           <thead>
             <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Surname</th>
-              <th>Email</th>
-              <th>Birthdate</th>
+              <th>Nome</th>
+              <th>Cognome</th>
+              <th>Mail</th>
+              <th>Data di nascita</th>
             </tr>
           </thead>
           <tbody>
             {users.map((user) => (
-              <tr key={user.id}>
-                <td>{user.id}</td>
+              <tr
+                key={`${user.name}_${user.surname}_${user.email}_${user.birthdate}`}
+              >
                 <td>{user.name}</td>
                 <td>{user.surname}</td>
                 <td>{user.email}</td>
