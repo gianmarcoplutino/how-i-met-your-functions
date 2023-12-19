@@ -138,23 +138,6 @@
       <artifactId>quarkus-test-security-jwt</artifactId>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>it.pagopa.selfcare</groupId>
-      <artifactId>onboarding-sdk-common</artifactId>
-      <version>${onboarding-sdk.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>it.pagopa.selfcare</groupId>
-      <artifactId>onboarding-sdk-azure-storage</artifactId>
-      <version>${onboarding-sdk.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>it.pagopa.selfcare</groupId>
-      <artifactId>onboarding-sdk-product</artifactId>
-      <version>${onboarding-sdk.version}</version>
-    </dependency>
-
 
     <!-- https://mvnrepository.com/artifact/eu.europa.ec.joinup.sd-dss/dss-test -->
     <dependency>

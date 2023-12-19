@@ -1,4 +1,4 @@
-package it.pagopa.selfcare.onboarding.service;
+package himyf.service;
 
 public class HimyfServiceDefault implements HimyfService {
 

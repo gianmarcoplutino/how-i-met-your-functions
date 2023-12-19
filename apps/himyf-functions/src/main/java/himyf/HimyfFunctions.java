@@ -1,4 +1,4 @@
-package it.pagopa.selfcare.onboarding;
+package himyf;
 
 /**
  * Azure Functions with HTTP Trigger integrated with Quarkus

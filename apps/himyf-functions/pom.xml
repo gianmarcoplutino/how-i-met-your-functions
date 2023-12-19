@@ -67,26 +67,6 @@
       <artifactId>quarkus-mailer</artifactId>
     </dependency>
     <dependency>
-      <groupId>it.pagopa.selfcare</groupId>
-      <artifactId>onboarding-sdk-azure-storage</artifactId>
-      <version>${onboarding-sdk.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>it.pagopa.selfcare</groupId>
-      <artifactId>onboarding-sdk-product</artifactId>
-      <version>${onboarding-sdk.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>it.pagopa.selfcare</groupId>
-      <artifactId>onboarding-sdk-common</artifactId>
-      <version>${onboarding-sdk.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>it.pagopa.selfcare</groupId>
-      <artifactId>onboarding-sdk-crypto</artifactId>
-      <version>${onboarding-sdk.version}</version>
-    </dependency>
-    <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-text</artifactId>
       <scope>compile</scope>
@@ -108,39 +88,10 @@
       <artifactId>quarkus-resteasy-jackson</artifactId>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/com.openhtmltopdf/openhtmltopdf-core -->
-    <dependency>
-      <groupId>com.openhtmltopdf</groupId>
-      <artifactId>openhtmltopdf-core</artifactId>
-      <version>1.0.10</version>
-    </dependency>
-
     <dependency>
       <groupId>org.mapstruct</groupId>
       <artifactId>mapstruct</artifactId>
       <version>${mapstruct.version}</version>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/com.openhtmltopdf/openhtmltopdf-pdfbox -->
-    <dependency>
-      <groupId>com.openhtmltopdf</groupId>
-      <artifactId>openhtmltopdf-pdfbox</artifactId>
-      <version>1.0.10</version>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/com.openhtmltopdf/openhtmltopdf-svg-support -->
-    <dependency>
-      <groupId>com.openhtmltopdf</groupId>
-      <artifactId>openhtmltopdf-svg-support</artifactId>
-      <version>1.0.10</version>
-      <exclusions>
-        <exclusion>
-          <groupId>xalan</groupId>
-          <artifactId>serializer</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>xalan</groupId>
-          <artifactId>xalan</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
 
     <dependency>

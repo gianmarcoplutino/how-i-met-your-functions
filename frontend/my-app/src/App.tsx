@@ -25,7 +25,7 @@ const App: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // change api URL
-    fetch("https://example.com/api", {
+    fetch("/persist", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
