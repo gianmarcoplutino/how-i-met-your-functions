@@ -84,9 +84,6 @@ const App: React.FC = () => {
         fileId,
       {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
       }
     )
       .then((response) => response.blob())
@@ -148,7 +145,7 @@ const App: React.FC = () => {
         Ottieni Utenti
       </button>
 
-      {users.length > 0 && (
+      {dummyUsers.length > 0 && (
         <table>
           <thead>
             <tr>
@@ -160,7 +157,7 @@ const App: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
+            {dummyUsers.map((user) => (
               <tr
                 key={`${user.name}_${user.surname}_${user.email}_${user.birthdate}`}
               >
