@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.acme</groupId>
+        <groupId>com.example</groupId>
         <artifactId>how-i-met-your-functions</artifactId>
         <version>0.0.1</version>
     </parent>
@@ -12,6 +12,10 @@
     <artifactId>apps</artifactId>
     <version>0.0.1</version>
     <packaging>pom</packaging>
+    <modules>
+        <module>xmas-functionjava-test</module>
+        <module>himyf-ms</module>
+    </modules>
 
     <profiles>
         <profile>
@@ -26,14 +30,14 @@
             </modules>
         </profile>
         <profile>
-            <id>himyf-functions</id>
+            <id>xmas-functionjava-test</id>
             <activation>
                 <file>
-                    <exists>himyf-functions/pom.xml</exists>
+                    <exists>xmas-functionjava-test/pom.xml</exists>
                 </file>
             </activation>
             <modules>
-                <module>himyf-functions</module>
+                <module>xmas-functionjava-test</module>
             </modules>
         </profile>
     </profiles>

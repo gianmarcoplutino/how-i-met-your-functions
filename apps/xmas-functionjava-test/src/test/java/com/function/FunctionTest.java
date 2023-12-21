@@ -1,6 +1,9 @@
 package com.function;
 
+import com.function.service.HimyfService;
 import com.microsoft.azure.functions.*;
+import org.junit.jupiter.api.Assertions;
+import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
@@ -8,7 +11,7 @@ import java.util.*;
 import java.util.logging.Logger;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
@@ -17,11 +20,14 @@ import static org.mockito.Mockito.*;
  * Unit test for Function class.
  */
 public class FunctionTest {
+
+    @Mock
+    HimyfService himyfService;
     /**
      * Unit test for HttpTriggerJava method.
      */
     @Test
-    public void testHttpTriggerJava() throws Exception {
+    void testHttpTriggerJava() throws Exception {
         // Setup
         @SuppressWarnings("unchecked")
         final HttpRequestMessage<Optional<String>> req = mock(HttpRequestMessage.class);
@@ -45,7 +51,7 @@ public class FunctionTest {
         doReturn(Logger.getGlobal()).when(context).getLogger();
 
         // Invoke
-        final HttpResponseMessage ret = new Function().run(req, context);
+        Assertions.assertDoesNotThrow(() -> new Function(himyfService).run(req, context));
 
         // Verify
        // assertEquals(HttpStatus.OK, ret.getStatus());
