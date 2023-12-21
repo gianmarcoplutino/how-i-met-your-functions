@@ -6,8 +6,8 @@ import java.util.Date;
 
 @Data
 public class CharacterRequest {
-        private String nome;
-        private String cognome;
-        private String mail;
-        private Date dataDiNascita;
+        private String name;
+        private String surname;
+        private String email;
+        private String birthdate;
 }

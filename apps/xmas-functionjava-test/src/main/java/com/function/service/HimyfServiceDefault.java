@@ -18,9 +18,8 @@ import java.io.InputStream;
 
 @ApplicationScoped
 @RequiredArgsConstructor
-public class HimyfServiceDefault implements HimyfService {
+public class HimyfServiceDefault {
 
-    @Override
     public ByteArrayOutputStream createPdf(String data){
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         Document document = new Document();
@@ -35,7 +34,6 @@ public class HimyfServiceDefault implements HimyfService {
         }
     }
 
-    @Override
     public void saveToStorage(ByteArrayOutputStream pdfStream, String fileId, ExecutionContext context){
         // Usa la managed identity per autenticarsi
         DefaultAzureCredentialBuilder credentialBuilder = new DefaultAzureCredentialBuilder();
@@ -54,7 +52,6 @@ public class HimyfServiceDefault implements HimyfService {
         }
     }
 
-    @Override
     public byte[] getPdfFromStorage(String fileId, ExecutionContext context) {
         DefaultAzureCredentialBuilder credentialBuilder = new DefaultAzureCredentialBuilder();
         BlobServiceClientBuilder blobServiceClientBuilder = new BlobServiceClientBuilder()

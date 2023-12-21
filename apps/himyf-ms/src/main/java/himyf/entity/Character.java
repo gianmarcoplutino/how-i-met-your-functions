@@ -5,15 +5,14 @@ import io.quarkus.mongodb.panache.common.MongoEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.util.Date;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
 @MongoEntity(collection="characters")
 public class Character extends ReactivePanacheMongoEntity {
     private String fileId;
-    private String nome;
-    private String cognome;
-    private String mail;
-    private Date dataDiNascita;
+    private String name;
+    private String surname;
+    private String email;
+    private String birthdate;
 }
