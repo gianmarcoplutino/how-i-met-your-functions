@@ -55,8 +55,18 @@ const App: React.FC = () => {
   };
 
   const dummyUsers: User[] = [
-    { name: 'John', surname: 'Doe', email: 'john@example.com', birthdate: '1990-01-01' },
-    { name: 'Jane', surname: 'Doe', email: 'jane@example.com', birthdate: '1995-05-15' },
+    {
+      name: "John",
+      surname: "Doe",
+      email: "john@example.com",
+      birthdate: "1990-01-01",
+    },
+    {
+      name: "Jane",
+      surname: "Doe",
+      email: "jane@example.com",
+      birthdate: "1995-05-15",
+    },
   ];
 
   return (
@@ -100,7 +110,7 @@ const App: React.FC = () => {
         </label>
         <button type="submit">Invia Utente</button>
       </form>
-      <button onClick={handleGetUsers}>Ottieni Utenti</button>
+      <button type="button" onClick={handleGetUsers}>Ottieni Utenti</button>
 
       {users.length > 0 && (
         <table>
@@ -110,6 +120,7 @@ const App: React.FC = () => {
               <th>Cognome</th>
               <th>Mail</th>
               <th>Data di nascita</th>
+              <th>Pdf</th>
             </tr>
           </thead>
           <tbody>
@@ -121,6 +132,16 @@ const App: React.FC = () => {
                 <td>{user.surname}</td>
                 <td>{user.email}</td>
                 <td>{user.birthdate}</td>
+                <td>
+                  <a
+                    download={"file.pdf"}
+                    target="_blank"
+                    href={"insert Link"}
+                    rel="noreferrer"
+                  >
+                    Scarica
+                  </a>
+                </td>
               </tr>
             ))}
           </tbody>
