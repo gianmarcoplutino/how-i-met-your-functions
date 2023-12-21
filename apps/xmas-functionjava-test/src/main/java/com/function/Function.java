@@ -7,17 +7,17 @@ import com.microsoft.azure.functions.HttpRequestMessage;
 import com.microsoft.azure.functions.annotation.AuthorizationLevel;
 import com.microsoft.azure.functions.annotation.FunctionName;
 import com.microsoft.azure.functions.annotation.HttpTrigger;
+import jakarta.inject.Inject;
+import lombok.AllArgsConstructor;
 
 import java.io.ByteArrayOutputStream;
 import java.util.Optional;
 
+@AllArgsConstructor
 public class Function {
 
     private final HimyfService himyfService;
 
-    public Function(HimyfService himyfService) {
-        this.himyfService = himyfService;
-    }
 
     @FunctionName("pdfFunction")
     public void run(@HttpTrigger(name = "req", methods = {HttpMethod.POST}, authLevel = AuthorizationLevel.ANONYMOUS) HttpRequestMessage<Optional<String>> req, final ExecutionContext context) {

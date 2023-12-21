@@ -8,11 +8,14 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.microsoft.azure.functions.ExecutionContext;
+import jakarta.enterprise.context.ApplicationScoped;
+import lombok.RequiredArgsConstructor;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-
+@ApplicationScoped
+@RequiredArgsConstructor
 public class HimyfServiceDefault implements HimyfService {
 
     @Override
