@@ -1,5 +1,4 @@
 package com.function.service;
-
 import com.azure.identity.DefaultAzureCredentialBuilder;
 import com.azure.storage.blob.BlobClient;
 import com.azure.storage.blob.BlobServiceClientBuilder;
@@ -9,7 +8,6 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.microsoft.azure.functions.ExecutionContext;
 import jakarta.enterprise.context.ApplicationScoped;
-import lombok.RequiredArgsConstructor;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -17,7 +15,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 @ApplicationScoped
-@RequiredArgsConstructor
 public class HimyfServiceDefault {
 
     public ByteArrayOutputStream createPdf(String data){

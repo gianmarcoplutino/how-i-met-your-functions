@@ -1,6 +1,5 @@
 package com.function;
 
-import com.function.service.HimyfService;
 import com.function.service.HimyfServiceDefault;
 import com.microsoft.azure.functions.*;
 import org.junit.jupiter.api.Assertions;
