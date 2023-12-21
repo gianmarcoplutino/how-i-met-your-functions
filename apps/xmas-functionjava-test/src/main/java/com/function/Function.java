@@ -20,7 +20,7 @@ public class Function {
 
     @FunctionName("pdfFunction")
     public HttpResponseMessage run(@HttpTrigger(name = "req", methods = {HttpMethod.GET, HttpMethod.POST},
-            authLevel = AuthorizationLevel.FUNCTION) HttpRequestMessage<Optional<String>> req,
+            authLevel = AuthorizationLevel.ANONYMOUS) HttpRequestMessage<Optional<String>> req,
                                    final ExecutionContext context) {
         context.getLogger().info("Java HTTP trigger processed a request.");
         Optional<String> optBody = req.getBody();
