@@ -59,7 +59,7 @@ public class HowIMetYourFunctionServiceDefault implements HowIMetYourFunctionSer
         builder.append(character.getName());
         builder.append(" ");
         builder.append(character.getSurname());
-        builder.append("la tua registrazione si è conclusa con successo");
+        builder.append(" la tua registrazione si è conclusa con successo");
         return builder.toString();
     }
 }
