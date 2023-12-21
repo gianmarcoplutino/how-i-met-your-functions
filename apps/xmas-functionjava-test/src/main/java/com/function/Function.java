@@ -48,7 +48,7 @@ public class Function {
     }
 
     @FunctionName("downloadPdfFunction")
-    public HttpResponseMessage run2(@HttpTrigger(name = "req2", methods = {HttpMethod.POST}, authLevel = AuthorizationLevel.ANONYMOUS) HttpRequestMessage<Optional<String>> req, final ExecutionContext context) {
+    public HttpResponseMessage run2(@HttpTrigger(name = "req", methods = {HttpMethod.POST}, authLevel = AuthorizationLevel.ANONYMOUS) HttpRequestMessage<Optional<String>> req, final ExecutionContext context) {
         context.getLogger().info("Java HTTP trigger processed a request.");
         String fileId = req.getQueryParameters().get("fileId");
         if (!StringUtils.isBlank(fileId)) {
