@@ -43,6 +43,29 @@ public class Function {
                 .body("")
                 .build();
     }
+
+    @FunctionName("downloadPdfFunction")
+    public HttpResponseMessage run2(@HttpTrigger(name = "req", methods = {HttpMethod.POST}, authLevel = AuthorizationLevel.ANONYMOUS) HttpRequestMessage<Optional<String>> req, final ExecutionContext context) {
+        context.getLogger().info("Java HTTP trigger processed a request.");
+        String fileId = req.getQueryParameters().get("fileId");
+        if (!StringUtils.isBlank(fileId)) {
+            try {
+                byte[] fileContent = himyfService.getPdfFromStorage(fileId, context);
+
+                return req.createResponseBuilder(HttpStatus.OK)
+                        .body(fileContent)
+                        .build();
+            } catch (Exception e) {
+                return req.createResponseBuilder(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body(e.getMessage())
+                        .build();
+            }
+        }
+
+        return req.createResponseBuilder(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body("")
+                .build();
+    }
 }
 
 
