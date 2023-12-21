@@ -6,5 +6,6 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "cdi")
 public interface HowIMetYourFunctionMapper {
+
     Character toEntity(CharacterRequest characterRequest);
 }

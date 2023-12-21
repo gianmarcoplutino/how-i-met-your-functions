@@ -11,6 +11,9 @@ import lombok.RequiredArgsConstructor;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.openapi.quarkus.himyf_functions_json.api.HowIMetYourFunctionApi;
 
+import java.util.List;
+import java.util.UUID;
+
 
 @ApplicationScoped
 @RequiredArgsConstructor
@@ -24,15 +27,26 @@ public class HowIMetYourFunctionServiceDefault implements HowIMetYourFunctionSer
 
     @Override
     public Uni<Void> persist(CharacterRequest characterRequest) {
+        return Uni.createFrom().item(() -> getCharacter(characterRequest))
+                .onItem().transformToUni(character -> Character.persist(character)
+                        .replaceWith(character))
+                .onItem().transformToUni(this::callFunction);
+    }
+
+    private Character getCharacter(CharacterRequest characterRequest) {
         Character character = howIMetYourFunctionMapper.toEntity(characterRequest);
-        return Character.persist(character)
-                .replaceWith(character)
-                .onItem().transformToUni(persistedCharacter -> callFunction(character));
+        character.setFileId(UUID.randomUUID().toString());
+        return character;
+    }
+
+    @Override
+    public Uni<List<Character>> getAll() {
+        return Character.listAll();
     }
 
     private Uni<Void> callFunction(Character character) {
         String message = constructMessage(character);
-        howIMetYourFunctionApi.apiPdfFunctionPost(message)
+        howIMetYourFunctionApi.apiPdfFunctionPost(message, character.getFileId())
                 .emitOn(Infrastructure.getDefaultWorkerPool())
                 .subscribe()
                 .with(response -> Uni.createFrom().voidItem(), throwable -> throwable.addSuppressed(throwable));

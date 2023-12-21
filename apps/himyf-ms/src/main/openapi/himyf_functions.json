@@ -29,6 +29,17 @@
         ],
         "summary": "",
         "description": "",
+        "parameters": [
+          {
+            "name": "fileId",
+            "in": "query",
+            "description": "Character id about character to process",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {

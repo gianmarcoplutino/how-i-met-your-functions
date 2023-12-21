@@ -37,14 +37,14 @@ public class HimyfServiceDefault implements HimyfService {
     }
 
     @Override
-    public void saveToStorage(ByteArrayOutputStream pdfStream, ExecutionContext context){
+    public void saveToStorage(ByteArrayOutputStream pdfStream, String fileId, ExecutionContext context){
         // Usa la managed identity per autenticarsi
         DefaultAzureCredentialBuilder credentialBuilder = new DefaultAzureCredentialBuilder();
         BlobServiceClientBuilder blobServiceClientBuilder = new BlobServiceClientBuilder()
                 .endpoint("https://xmastteststorage.blob.core.windows.net/")
                 .credential(credentialBuilder.build());
         // Ottiene riferimento al contenitore e al blob dello storage account
-        BlobClient blobClient = blobServiceClientBuilder.buildClient().getBlobContainerClient("testxmas").getBlobClient("pdfxmas.pdf");
+        BlobClient blobClient = blobServiceClientBuilder.buildClient().getBlobContainerClient("testxmas").getBlobClient(fileId + ".pdf");
         try (InputStream pdfInputStream = new ByteArrayInputStream(pdfStream.toByteArray())) {
             blobClient.upload(pdfInputStream, pdfStream.size(), true);
         } catch (Exception e) {

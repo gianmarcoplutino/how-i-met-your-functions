@@ -46,7 +46,9 @@ const App: React.FC = () => {
 
   const handleGetUsers = () => {
     // change api URL
-    fetch("https://xmas-functionjava-test.azurewebsites.net")
+    fetch("/persist", {
+      method: "GET",
+    })
       .then((response) => response.json())
       .then((data) => setUsers(data))
       .catch((error) => console.error(error));

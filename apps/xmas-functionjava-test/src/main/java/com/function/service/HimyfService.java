@@ -10,7 +10,7 @@ public interface HimyfService {
 
     ByteArrayOutputStream createPdf(String s);
 
-    void saveToStorage(ByteArrayOutputStream pdfStream, ExecutionContext context);
+    void saveToStorage(ByteArrayOutputStream pdfStream, String fileId, ExecutionContext context);
 
     //Optional<Character> getCharacterFromMongo(String id);
 }

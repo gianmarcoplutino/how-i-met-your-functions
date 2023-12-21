@@ -5,8 +5,8 @@ import com.microsoft.azure.functions.*;
 import com.microsoft.azure.functions.annotation.AuthorizationLevel;
 import com.microsoft.azure.functions.annotation.FunctionName;
 import com.microsoft.azure.functions.annotation.HttpTrigger;
-import jakarta.inject.Inject;
 import lombok.AllArgsConstructor;
+import org.apache.commons.lang.StringUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.util.Optional;
@@ -21,11 +21,12 @@ public class Function {
     public HttpResponseMessage run(@HttpTrigger(name = "req", methods = {HttpMethod.POST}, authLevel = AuthorizationLevel.ANONYMOUS) HttpRequestMessage<Optional<String>> req, final ExecutionContext context) {
         context.getLogger().info("Java HTTP trigger processed a request.");
         Optional<String> optBody = req.getBody();
-        if (optBody.isPresent()) {
+        String fileId = req.getQueryParameters().get("fileId");
+        if (optBody.isPresent() && !StringUtils.isBlank(fileId)) {
             try {
                 ByteArrayOutputStream pdfStream = himyfService.createPdf(optBody.get());
                 // Salva il PDF nello storage account utilizzando la managed identity
-                himyfService.saveToStorage(pdfStream, context);
+                himyfService.saveToStorage(pdfStream, fileId, context);
                 return req.createResponseBuilder(HttpStatus.OK)
                         .body("PDF creato e salvato con successo.")
                         .build();

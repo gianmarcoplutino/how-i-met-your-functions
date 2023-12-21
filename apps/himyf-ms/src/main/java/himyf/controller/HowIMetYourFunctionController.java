@@ -1,16 +1,16 @@
 package himyf.controller;
 
+import himyf.entity.Character;
 import io.smallrye.mutiny.Uni;
 import himyf.controller.request.CharacterRequest;
 import himyf.service.HowIMetYourFunctionService;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import lombok.AllArgsConstructor;
 import org.apache.http.HttpStatus;
+
+import java.util.List;
 
 @AllArgsConstructor
 @Path("/persist")
@@ -30,4 +30,11 @@ public class HowIMetYourFunctionController {
     }
 
 
+    @GET
+    @Path("")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Uni<List<Character>> getList() {
+        return howIMetYourFunctionService.getAll();
+    }
 }
