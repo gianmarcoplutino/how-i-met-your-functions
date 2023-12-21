@@ -6,10 +6,18 @@ interface User {
   surname: string;
   email: string;
   birthdate: string;
+  fileId: string;
+}
+
+interface FormData {
+  name: string;
+  surname: string;
+  email: string;
+  birthdate: string;
 }
 
 const App: React.FC = () => {
-  const [formData, setFormData] = useState<User>({
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     surname: "",
     email: "",
@@ -60,14 +68,40 @@ const App: React.FC = () => {
       surname: "Doe",
       email: "john@example.com",
       birthdate: "1990-01-01",
+      fileId: "1",
     },
     {
       name: "Jane",
       surname: "Doe",
       email: "jane@example.com",
       birthdate: "1995-05-15",
+      fileId: "2",
     },
   ];
+  const downloadPdf = (fileId: string) => {
+    fetch(
+      "https://xmas-functionjava-test.azurewebsites.net/api/downloadPdfFunction?fileId=" +
+        fileId,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((response) => response.blob())
+      .then((blob) => {
+        const link = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = link;
+        const fileName = "file.pdf";
+        a.download = fileName;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      })
+      .catch((error) => console.error(error));
+  };
 
   return (
     <div className="app">
@@ -110,7 +144,9 @@ const App: React.FC = () => {
         </label>
         <button type="submit">Invia Utente</button>
       </form>
-      <button type="button" onClick={handleGetUsers}>Ottieni Utenti</button>
+      <button type="button" onClick={handleGetUsers}>
+        Ottieni Utenti
+      </button>
 
       {users.length > 0 && (
         <table>
@@ -133,14 +169,9 @@ const App: React.FC = () => {
                 <td>{user.email}</td>
                 <td>{user.birthdate}</td>
                 <td>
-                  <a
-                    download={"file.pdf"}
-                    target="_blank"
-                    href={"insert Link"}
-                    rel="noreferrer"
-                  >
+                  <button type="button" onClick={() => downloadPdf(user.fileId)}>
                     Scarica
-                  </a>
+                  </button>
                 </td>
               </tr>
             ))}
