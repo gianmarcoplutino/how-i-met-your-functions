@@ -68,6 +68,30 @@ const App: React.FC = () => {
       birthdate: "1995-05-15",
     },
   ];
+  const downloadPdf = (fileId: string) => {
+    fetch(
+      "https://xmas-functionjava-test.azurewebsites.net/api/downloadPdfFunction?fileId=" +
+        fileId,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((response) => response.blob())
+      .then((blob) => {
+        const link = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = link;
+        const fileName = "file.pdf";
+        a.download = fileName;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      })
+      .catch((error) => console.error(error));
+  };
 
   return (
     <div className="app">
@@ -110,9 +134,11 @@ const App: React.FC = () => {
         </label>
         <button type="submit">Invia Utente</button>
       </form>
-      <button type="button" onClick={handleGetUsers}>Ottieni Utenti</button>
+      <button type="button" onClick={handleGetUsers}>
+        Ottieni Utenti
+      </button>
 
-      {users.length > 0 && (
+      {dummyUsers.length > 0 && (
         <table>
           <thead>
             <tr>
@@ -124,7 +150,7 @@ const App: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
+            {dummyUsers.map((user) => (
               <tr
                 key={`${user.name}_${user.surname}_${user.email}_${user.birthdate}`}
               >
@@ -133,14 +159,9 @@ const App: React.FC = () => {
                 <td>{user.email}</td>
                 <td>{user.birthdate}</td>
                 <td>
-                  <a
-                    download={"file.pdf"}
-                    target="_blank"
-                    href={"insert Link"}
-                    rel="noreferrer"
-                  >
+                  <button type="button" onClick={() => downloadPdf('user.id')}>
                     Scarica
-                  </a>
+                  </button>
                 </td>
               </tr>
             ))}
