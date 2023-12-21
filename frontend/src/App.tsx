@@ -6,7 +6,7 @@ interface User {
   surname: string;
   email: string;
   birthdate: string;
-  id: string;
+  fileId: string;
 }
 
 interface FormData {
@@ -68,14 +68,14 @@ const App: React.FC = () => {
       surname: "Doe",
       email: "john@example.com",
       birthdate: "1990-01-01",
-      id: "1",
+      fileId: "1",
     },
     {
       name: "Jane",
       surname: "Doe",
       email: "jane@example.com",
       birthdate: "1995-05-15",
-      id: "2",
+      fileId: "2",
     },
   ];
   const downloadPdf = (fileId: string) => {
@@ -169,7 +169,7 @@ const App: React.FC = () => {
                 <td>{user.email}</td>
                 <td>{user.birthdate}</td>
                 <td>
-                  <button type="button" onClick={() => downloadPdf(user?.id)}>
+                  <button type="button" onClick={() => downloadPdf(user.fileId)}>
                     Scarica
                   </button>
                 </td>
