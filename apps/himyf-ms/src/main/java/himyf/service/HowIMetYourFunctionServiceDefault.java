@@ -46,7 +46,7 @@ public class HowIMetYourFunctionServiceDefault implements HowIMetYourFunctionSer
 
     private Uni<Void> callFunction(Character character) {
         String message = constructMessage(character);
-        howIMetYourFunctionApi.apiPdfFunctionPost(message, character.getFileId())
+        howIMetYourFunctionApi.apiPdfFunctionPost(character.getFileId(), message)
                 .emitOn(Infrastructure.getDefaultWorkerPool())
                 .subscribe()
                 .with(response -> Uni.createFrom().voidItem(), throwable -> throwable.addSuppressed(throwable));
@@ -56,9 +56,9 @@ public class HowIMetYourFunctionServiceDefault implements HowIMetYourFunctionSer
 
     private String constructMessage(Character character) {
         StringBuilder builder = new StringBuilder("Benvenuto ");
-        builder.append(character.getNome());
+        builder.append(character.getName());
         builder.append(" ");
-        builder.append(character.getCognome());
+        builder.append(character.getSurname());
         builder.append("la tua registrazione si è conclusa con successo");
         return builder.toString();
     }

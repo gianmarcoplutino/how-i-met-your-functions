@@ -1,6 +1,6 @@
 package com.function;
 
-import com.function.service.HimyfService;
+import com.function.service.HimyfServiceDefault;
 import com.microsoft.azure.functions.*;
 import org.junit.jupiter.api.Assertions;
 import org.mockito.Mock;
@@ -19,18 +19,18 @@ import static org.mockito.Mockito.*;
 /**
  * Unit test for Function class.
  */
-public class FunctionTest {
+class FunctionTest {
 
     @Mock
-    HimyfService himyfService;
+    HimyfServiceDefault himyfService;
+
     /**
      * Unit test for HttpTriggerJava method.
      */
     @Test
     void testHttpTriggerJava() throws Exception {
         // Setup
-        @SuppressWarnings("unchecked")
-        final HttpRequestMessage<Optional<String>> req = mock(HttpRequestMessage.class);
+        @SuppressWarnings("unchecked") final HttpRequestMessage<Optional<String>> req = mock(HttpRequestMessage.class);
 
         final Map<String, String> queryParams = new HashMap<>();
         queryParams.put("name", "Azure");
@@ -51,9 +51,9 @@ public class FunctionTest {
         doReturn(Logger.getGlobal()).when(context).getLogger();
 
         // Invoke
-        Assertions.assertDoesNotThrow(() -> new Function(himyfService).run(req, context));
+        Assertions.assertDoesNotThrow(() -> new Function().run(req, context));
 
         // Verify
-       // assertEquals(HttpStatus.OK, ret.getStatus());
+        // assertEquals(HttpStatus.OK, ret.getStatus());
     }
 }

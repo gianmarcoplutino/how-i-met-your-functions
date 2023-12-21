@@ -1,24 +1,27 @@
 package com.function;
-
-import com.function.service.HimyfService;
+;
+import com.function.service.HimyfServiceDefault;
 import com.microsoft.azure.functions.*;
 import com.microsoft.azure.functions.annotation.AuthorizationLevel;
 import com.microsoft.azure.functions.annotation.FunctionName;
 import com.microsoft.azure.functions.annotation.HttpTrigger;
-import lombok.AllArgsConstructor;
 import org.apache.commons.lang.StringUtils;
-
 import java.io.ByteArrayOutputStream;
 import java.util.Optional;
 
-@AllArgsConstructor
 public class Function {
 
-    private final HimyfService himyfService;
+    private final HimyfServiceDefault himyfService;
+
+    public Function() {
+        this.himyfService = new HimyfServiceDefault();
+    }
 
 
     @FunctionName("pdfFunction")
-    public HttpResponseMessage run(@HttpTrigger(name = "req", methods = {HttpMethod.POST}, authLevel = AuthorizationLevel.ANONYMOUS) HttpRequestMessage<Optional<String>> req, final ExecutionContext context) {
+    public HttpResponseMessage run(@HttpTrigger(name = "req", methods = {HttpMethod.GET, HttpMethod.POST},
+            authLevel = AuthorizationLevel.FUNCTION) HttpRequestMessage<Optional<String>> req,
+                                   final ExecutionContext context) {
         context.getLogger().info("Java HTTP trigger processed a request.");
         Optional<String> optBody = req.getBody();
         String fileId = req.getQueryParameters().get("fileId");
@@ -45,7 +48,7 @@ public class Function {
     }
 
     @FunctionName("downloadPdfFunction")
-    public HttpResponseMessage run2(@HttpTrigger(name = "req", methods = {HttpMethod.POST}, authLevel = AuthorizationLevel.ANONYMOUS) HttpRequestMessage<Optional<String>> req, final ExecutionContext context) {
+    public HttpResponseMessage run2(@HttpTrigger(name = "req2", methods = {HttpMethod.POST}, authLevel = AuthorizationLevel.ANONYMOUS) HttpRequestMessage<Optional<String>> req, final ExecutionContext context) {
         context.getLogger().info("Java HTTP trigger processed a request.");
         String fileId = req.getQueryParameters().get("fileId");
         if (!StringUtils.isBlank(fileId)) {
