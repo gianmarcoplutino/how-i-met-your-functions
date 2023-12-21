@@ -6,10 +6,18 @@ interface User {
   surname: string;
   email: string;
   birthdate: string;
+  id: string;
+}
+
+interface FormData {
+  name: string;
+  surname: string;
+  email: string;
+  birthdate: string;
 }
 
 const App: React.FC = () => {
-  const [formData, setFormData] = useState<User>({
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     surname: "",
     email: "",
@@ -60,12 +68,14 @@ const App: React.FC = () => {
       surname: "Doe",
       email: "john@example.com",
       birthdate: "1990-01-01",
+      id: "1",
     },
     {
       name: "Jane",
       surname: "Doe",
       email: "jane@example.com",
       birthdate: "1995-05-15",
+      id: "2",
     },
   ];
   const downloadPdf = (fileId: string) => {
@@ -138,7 +148,7 @@ const App: React.FC = () => {
         Ottieni Utenti
       </button>
 
-      {dummyUsers.length > 0 && (
+      {users.length > 0 && (
         <table>
           <thead>
             <tr>
@@ -150,7 +160,7 @@ const App: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {dummyUsers.map((user) => (
+            {users.map((user) => (
               <tr
                 key={`${user.name}_${user.surname}_${user.email}_${user.birthdate}`}
               >
@@ -159,7 +169,7 @@ const App: React.FC = () => {
                 <td>{user.email}</td>
                 <td>{user.birthdate}</td>
                 <td>
-                  <button type="button" onClick={() => downloadPdf('user.id')}>
+                  <button type="button" onClick={() => downloadPdf(user?.id)}>
                     Scarica
                   </button>
                 </td>
