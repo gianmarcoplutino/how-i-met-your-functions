@@ -79,32 +79,14 @@ const App: React.FC = () => {
     },
   ];
   const downloadPdf = (fileId: string) => {
-    fetch(
-      "https://xmas-functionjava-test.azurewebsites.net/api/downloadPdfFunction?fileId=" +
-        fileId,
-      {
-        method: "POST",
-      }
-    )
-      .then((response) => response.blob())
-      .then((blob) => {
-        const link = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = link;
-        const fileName = "file.pdf";
-        a.download = fileName;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-      })
-      .catch((error) => console.error(error));
-  };
+  window.open("https://xmas-functionjava-test.azurewebsites.net/api/downloadPdfFunction?fileId=" + fileId, "_blank")
+  }
 
   return (
     <div className="app">
       <form className="form" onSubmit={handleSubmit}>
         <label>
-          Nome:
+          <p>Nome:</p>
           <input
             type="text"
             name="name"
@@ -113,7 +95,7 @@ const App: React.FC = () => {
           />
         </label>
         <label>
-          Cognome:
+          <p>Cognome:</p>
           <input
             type="text"
             name="surname"
@@ -122,7 +104,7 @@ const App: React.FC = () => {
           />
         </label>
         <label>
-          Mail:
+          <p>Mail:</p>
           <input
             type="email"
             name="email"
@@ -131,7 +113,7 @@ const App: React.FC = () => {
           />
         </label>
         <label>
-          Data di nascita:
+          <p>Data di nascita:</p>
           <input
             type="date"
             name="birthdate"
@@ -145,7 +127,7 @@ const App: React.FC = () => {
         Ottieni Utenti
       </button>
 
-      {dummyUsers.length > 0 && (
+      {users.length > 0 && (
         <table>
           <thead>
             <tr>
@@ -157,7 +139,7 @@ const App: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {dummyUsers.map((user) => (
+            {users.map((user) => (
               <tr
                 key={`${user.name}_${user.surname}_${user.email}_${user.birthdate}`}
               >
